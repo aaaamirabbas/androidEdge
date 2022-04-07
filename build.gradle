@@ -1,0 +1,134 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+    id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
+}
+
+android {
+    compileSdk targetV
+
+    defaultConfig {
+        minSdk minV
+        targetSdk targetV
+
+        vectorDrawables.useSupportLibrary = true
+        resConfigs "en", "fa"
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        debug {
+            ext.enableCrashlytics = false
+            ext.alwaysUpdateBuildId = false
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                    'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+
+    kapt {
+        correctErrorTypes true
+        useBuildCache = true
+    }
+
+    hilt {
+        enableAggregatingTask = true
+        enableExperimentalClasspathAggregation = true
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    lintOptions {
+        checkDependencies true
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    packagingOptions {
+        exclude 'META-INF/library_release.kotlin_module'
+    }
+}
+
+dependencies {
+
+    //ktx
+    api "androidx.core:core-ktx:$ktxV"
+
+    //android
+    api "androidx.appcompat:appcompat:$appcompatV"
+    api "androidx.fragment:fragment-ktx:$fragmentKTXV"
+    api "androidx.constraintlayout:constraintlayout:$constraintV"
+    api "androidx.recyclerview:recyclerview:$recyclerV"
+    api "androidx.viewpager2:viewpager2:$viewpager2V"
+
+    //material
+    api "com.google.android.material:material:$materialV"
+
+    //lifecycle
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleV"
+    api "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleV"
+    api "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycleV"
+    api "androidx.lifecycle:lifecycle-common-java8:$lifecycleV"
+    api "androidx.lifecycle:lifecycle-service:$lifecycleV"
+    api "androidx.lifecycle:lifecycle-process:$lifecycleV"
+    api "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycleV"
+
+    //hilt google
+    api "com.google.dagger:hilt-android:$hiltV"
+    kapt "com.google.dagger:hilt-compiler:$hiltV"
+
+    //hilt android
+    api "androidx.hilt:hilt-navigation-fragment:$hiltLifecycleV"
+    kapt "androidx.hilt:hilt-compiler:$hiltLifecycleV"
+
+    //navigation
+    api "androidx.navigation:navigation-fragment-ktx:$navV"
+    api "androidx.navigation:navigation-ui-ktx:$navV"
+    api "androidx.navigation:navigation-dynamic-features-fragment:$navV"
+
+    //coroutine
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineV"
+
+    //retrofit
+    api "com.squareup.retrofit2:retrofit:$retrofitV"
+    api "com.squareup.retrofit2:converter-gson:$retrofitGsonV"
+
+    //ok http
+    api "com.squareup.okhttp3:okhttp:$okHttpV"
+    api "com.squareup.okhttp3:logging-interceptor:$okHttpV"
+
+    //gSon
+    api "com.google.code.gson:gson:$gsonV"
+
+    //reactor
+    api "com.github.aaaamirabbas:reactor:$reactorV"
+
+    //glide
+    api "com.github.bumptech.glide:glide:$glideV"
+    kapt "com.github.bumptech.glide:compiler:$glideV"
+
+    //paging
+    api "androidx.paging:paging-runtime-ktx:$pagingV"
+
+    //ste tho
+    api "com.facebook.stetho:stetho:$stethoV"
+    api "com.facebook.stetho:stetho-okhttp3:$stethoV"
+}
