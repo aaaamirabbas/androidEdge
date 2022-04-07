@@ -13,7 +13,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideGSon(): Gson {
+    fun provideGson(): Gson {
         return Gson()
     }
 }

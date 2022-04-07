@@ -9,9 +9,10 @@ import javax.inject.Inject
 class NetworkInterceptor @Inject constructor(
     private val context: Context
 ) : Interceptor {
+
     override fun intercept(chain: Interceptor.Chain): Response {
         if (!NetworkUtils.isConnected(context)) {
-            throw NoConnectivityException(context)
+            throw NoConnectivityException()
         }
 
         val builder = chain.request().newBuilder()
@@ -19,9 +20,7 @@ class NetworkInterceptor @Inject constructor(
     }
 }
 
-class NoConnectivityException(
-    private val context: Context
-) : NetworkErrorException() {
+class NoConnectivityException : NetworkErrorException() {
     override val message: String
-        get() = "no network"
+        get() = "the network is not connected"
 }

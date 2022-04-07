@@ -9,21 +9,15 @@ import java.util.*
 class LocaleUtils {
     companion object {
 
-        //force persian language
-        private const val language = "fa"
+        private const val language = "en"
 
         @JvmStatic
         fun setLocale(c: Context): Context {
-            return updateResources(
-                c
-            )
+            return updateResources(c)
         }
 
         fun setNewLocale(c: Context, language: String): Context {
-            return updateResources(
-                c,
-                language
-            )
+            return updateResources(c, language)
         }
 
         fun getLocale(res: Resources): Locale {
