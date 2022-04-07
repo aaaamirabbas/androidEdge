@@ -125,6 +125,9 @@ dependencies {
     api "com.github.bumptech.glide:glide:$glideV"
     kapt "com.github.bumptech.glide:compiler:$glideV"
 
+    //androidSVG
+    api "com.caverock:androidsvg-aar:$androidSV"
+
     //paging
     api "androidx.paging:paging-runtime-ktx:$pagingV"
 

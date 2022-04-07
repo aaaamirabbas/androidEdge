@@ -4,23 +4,49 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Bundle
-import androidx.annotation.LayoutRes
+import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.viewbinding.ViewBinding
+import io.github.aaaamirabbas.edge.utils.crashlytics.CrashlyticsUtils
 import io.github.aaaamirabbas.edge.utils.language.LocaleUtils
 
-abstract class BaseActivity : AppCompatActivity() {
 
-    @LayoutRes
-    abstract fun layoutRes(): Int
+abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
+
+    private var _binding: ViewBinding? = null
+    abstract val bindingInflater: (LayoutInflater) -> VB
+
+    @Suppress("UNCHECKED_CAST")
+    val binding: VB?
+        get() = _binding as VB?
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         LocaleUtils.setLocale(this)
         resetTitle()
-        setContentView(layoutRes())
+
+        _binding = bindingInflater.invoke(layoutInflater)
+        ViewCompat.setLayoutDirection(
+            requireNotNull(_binding).root,
+            ViewCompat.LAYOUT_DIRECTION_RTL
+        )
+
+        setContentView(requireNotNull(_binding).root)
+
         viewHandler(savedInstanceState)
+
+        initObservers()
     }
 
+    /**
+     * fixes android RTL
+     */
     private fun resetTitle() {
         try {
             val label = packageManager.getActivityInfo(
@@ -30,7 +56,7 @@ abstract class BaseActivity : AppCompatActivity() {
                 setTitle(label)
             }
         } catch (e: PackageManager.NameNotFoundException) {
-            e.printStackTrace()
+            CrashlyticsUtils.captureException(e, this::class.simpleName)
         }
     }
 
@@ -44,4 +70,6 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     abstract fun viewHandler(savedInstanceState: Bundle?)
+
+    protected open fun initObservers() {}
 }

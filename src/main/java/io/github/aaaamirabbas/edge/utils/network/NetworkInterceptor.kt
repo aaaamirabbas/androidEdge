@@ -2,7 +2,6 @@ package io.github.aaaamirabbas.edge.utils.network
 
 import android.accounts.NetworkErrorException
 import android.content.Context
-import io.github.aaaamirabbas.edge.ext.isNetworkAvailable
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
@@ -11,7 +10,7 @@ class NetworkInterceptor @Inject constructor(
     private val context: Context
 ) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-        if (!context.isNetworkAvailable()) {
+        if (!NetworkUtils.isConnected(context)) {
             throw NoConnectivityException(context)
         }
 

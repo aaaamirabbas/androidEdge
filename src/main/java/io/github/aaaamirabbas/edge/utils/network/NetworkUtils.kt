@@ -2,60 +2,42 @@ package io.github.aaaamirabbas.edge.utils.network
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.Network
-import android.net.NetworkCapabilities
-import android.net.NetworkRequest
-import android.os.Build
-import androidx.annotation.RequiresApi
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import io.github.aaaamirabbas.edge.utils.crashlytics.CrashlyticsUtils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import java.io.IOException
+import java.net.InetSocketAddress
+import java.net.Socket
 
-/**
- * Network Utility to detect availability or unavailability of Internet connection
- */
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-object NetworkUtils : ConnectivityManager.NetworkCallback() {
 
-    private val networkLiveData: MutableLiveData<Boolean> = MutableLiveData()
+object NetworkUtils {
 
-    /**
-     * Returns instance of [LiveData] which can be observed for network changes.
-     */
-    fun getNetworkLiveData(context: Context): LiveData<Boolean> {
-        val connectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    fun isConnected(context: Context): Boolean {
+        val connectivityMgr =
+            context.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE)
+                    as ConnectivityManager
+        val networkInfo = connectivityMgr.activeNetworkInfo
+        return networkInfo != null && networkInfo.isConnected
+    }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            connectivityManager.registerDefaultNetworkCallback(this)
-        } else {
-            val builder = NetworkRequest.Builder()
-            connectivityManager.registerNetworkCallback(builder.build(), this)
-        }
+    suspend fun hasOnline(serverURL: String) = flow {
+        while (true) {
+            try {
+                val timeoutMs = 1500
+                val socket = Socket()
+                val socketAddress = InetSocketAddress(serverURL, 80)
 
-        var isConnected = false
-
-        // Retrieve current status of connectivity
-        connectivityManager.allNetworks.forEach { network ->
-            val networkCapability = connectivityManager.getNetworkCapabilities(network)
-
-            networkCapability?.let {
-                if (it.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)) {
-                    isConnected = true
-                    return@forEach
-                }
+                socket.connect(socketAddress, timeoutMs)
+                socket.close()
+                emit(true)
+            } catch (e: IOException) {
+                CrashlyticsUtils.captureException(e, this::class.simpleName)
+                emit(false)
             }
+
+            delay(1000)
         }
-
-        networkLiveData.postValue(isConnected)
-
-        return networkLiveData
-    }
-
-    override fun onAvailable(network: Network) {
-        networkLiveData.postValue(true)
-    }
-
-    override fun onLost(network: Network) {
-        networkLiveData.postValue(false)
-    }
+    }.flowOn(Dispatchers.IO)
 }

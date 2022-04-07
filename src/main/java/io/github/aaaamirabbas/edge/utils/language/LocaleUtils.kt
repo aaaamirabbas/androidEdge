@@ -8,6 +8,8 @@ import java.util.*
 
 class LocaleUtils {
     companion object {
+
+        //force persian language
         private const val language = "fa"
 
         @JvmStatic
