@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.google.gson.reflect.TypeToken
 import javax.inject.Inject
+import kotlin.Result
 
 class GsonUtils @Inject constructor(
     val gson: Gson
