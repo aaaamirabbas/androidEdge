@@ -2,7 +2,7 @@ package io.github.aaaamirabbas.edge.utils.network
 
 import android.content.Context
 import android.net.ConnectivityManager
-import io.github.aaaamirabbas.edge.ext.flowOnIO
+import io.github.aaaamirabbas.edge.ext.other.flowOnIO
 import kotlinx.coroutines.delay
 import java.net.InetSocketAddress
 import java.net.Socket
