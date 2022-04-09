@@ -1,6 +1,6 @@
 package io.github.aaaamirabbas.edge.base.architecture
 
-import io.github.aaaamirabbas.edge.domain.model.FailureModel
+import io.github.aaaamirabbas.edge.domain.model.other.FailureModel
 import io.github.aaaamirabbas.edge.utils.dateTime.TimeUtils
 import io.github.aaaamirabbas.edge.utils.operation.OperationResult
 import retrofit2.Response

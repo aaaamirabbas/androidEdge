@@ -1,4 +1,4 @@
-package ir.nahad.common.utils.liveData
+package io.github.aaaamirabbas.edge.utils.liveData
 
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner

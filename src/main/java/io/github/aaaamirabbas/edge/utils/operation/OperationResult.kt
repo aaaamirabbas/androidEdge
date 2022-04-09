@@ -1,6 +1,6 @@
 package io.github.aaaamirabbas.edge.utils.operation
 
-import io.github.aaaamirabbas.edge.domain.model.FailureModel
+import io.github.aaaamirabbas.edge.domain.model.other.FailureModel
 
 data class OperationResult<T>(
     private var onDoing: Long? = null,

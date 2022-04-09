@@ -2,16 +2,13 @@ package io.github.aaaamirabbas.edge.base.architecture
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import io.github.aaaamirabbas.edge.domain.model.FailureModel
+import io.github.aaaamirabbas.edge.domain.model.other.FailureModel
 import io.github.aaaamirabbas.edge.ext.other.flowOnIO
 import io.github.aaaamirabbas.edge.ext.other.launchOnViewModelIO
 import io.github.aaaamirabbas.edge.ext.other.launchOnViewModelMain
 import io.github.aaaamirabbas.edge.utils.dateTime.TimeUtils
 import io.github.aaaamirabbas.edge.utils.operation.OperationResult
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 abstract class BaseViewModel : ViewModel() {
 
