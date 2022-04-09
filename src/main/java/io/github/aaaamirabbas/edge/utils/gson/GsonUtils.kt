@@ -1,4 +1,4 @@
-package io.github.aaaamirabbas.edge.utils.data
+package io.github.aaaamirabbas.edge.utils.gson
 
 import com.google.gson.Gson
 import com.google.gson.JsonElement

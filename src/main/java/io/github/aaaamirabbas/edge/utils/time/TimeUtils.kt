@@ -1,4 +1,7 @@
 package io.github.aaaamirabbas.edge.utils.time
 
-class TimeUtils {
+object TimeUtils {
+    fun getCurrentTime(): Long {
+        return System.currentTimeMillis()
+    }
 }

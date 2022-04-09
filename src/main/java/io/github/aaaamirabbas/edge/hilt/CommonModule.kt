@@ -7,7 +7,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import io.github.aaaamirabbas.edge.utils.data.GsonUtils
+import io.github.aaaamirabbas.edge.utils.gson.GsonUtils
 import javax.inject.Named
 import javax.inject.Singleton
 

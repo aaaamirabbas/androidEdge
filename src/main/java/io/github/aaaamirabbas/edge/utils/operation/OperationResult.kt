@@ -1,21 +1,38 @@
 package io.github.aaaamirabbas.edge.utils.operation
 
-data class OperationUIResult<T>(
-    var onDoing: Long? = null,
-    var onSuccess: T? = null,
-    var onError: String? = null
+import io.github.aaaamirabbas.edge.domain.model.FailureModel
+
+data class OperationResult<T>(
+    private var onDoing: Long? = null,
+    private var onSuccess: T? = null,
+    private var onFailure: FailureModel? = null
 ) {
     companion object {
-        fun <T> doing(onGoing: Long): OperationUIResult<T> {
-            return OperationUIResult(onDoing = onGoing)
+        fun <T> doing(onDoing: Long): OperationResult<T> {
+            return OperationResult(onDoing = onDoing)
         }
 
-        fun <T> error(onError: String): OperationUIResult<T> {
-            return OperationUIResult(onError = onError)
+        fun <T> failure(onFailure: FailureModel): OperationResult<T> {
+            return OperationResult(onFailure = onFailure)
         }
 
-        fun <T> success(onSuccess: T): OperationUIResult<T> {
-            return OperationUIResult(onSuccess = onSuccess)
+        fun <T> success(onSuccess: T): OperationResult<T> {
+            return OperationResult(onSuccess = onSuccess)
         }
+    }
+
+    fun onDoing(onDoing: (Long) -> Unit): OperationResult<T> {
+        this.onDoing?.let { onDoing(it) }
+        return this
+    }
+
+    fun onSuccess(onSuccess: (T) -> Unit): OperationResult<T> {
+        this.onSuccess?.let { onSuccess(it) }
+        return this
+    }
+
+    fun onFailure(onFailure: (FailureModel) -> Unit): OperationResult<T> {
+        this.onFailure?.let { onFailure(it) }
+        return this
     }
 }

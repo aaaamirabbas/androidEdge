@@ -1,4 +1,5 @@
 package io.github.aaaamirabbas.edge.ext
 
-class LiveDataExt {
-}
+import androidx.lifecycle.LiveData
+
+fun <T> LiveData<T>.toImmutable(): LiveData<T> = this

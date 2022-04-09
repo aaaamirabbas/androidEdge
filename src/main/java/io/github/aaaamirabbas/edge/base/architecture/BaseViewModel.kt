@@ -1,10 +1,9 @@
-package io.github.aaaamirabbas.edge.base.mvvm
+package io.github.aaaamirabbas.edge.base.architecture
 
 import androidx.lifecycle.ViewModel
 import io.github.aaaamirabbas.edge.ext.flowOnIO
 import io.github.aaaamirabbas.edge.ext.launchOnIO
 import io.github.aaaamirabbas.edge.utils.operation.OperationResult
-import io.github.aaaamirabbas.edge.utils.operation.OperationStatus
 import io.github.aaaamirabbas.edge.utils.time.TimeUtils
 import kotlinx.coroutines.flow.collect
 
