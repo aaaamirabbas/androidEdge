@@ -1,4 +1,4 @@
-package io.github.aaaamirabbas.edge.ext
+package io.github.aaaamirabbas.edge.ext.other
 
 import androidx.lifecycle.LiveData
 

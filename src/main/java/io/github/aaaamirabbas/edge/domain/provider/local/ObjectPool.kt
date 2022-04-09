@@ -1,7 +1,7 @@
 package io.github.aaaamirabbas.edge.domain.provider.local
 
 
-open class ObjectPool {
+class ObjectPool {
 
     private val poolMap = hashMapOf<String, Any>()
 

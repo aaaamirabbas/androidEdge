@@ -1,4 +1,4 @@
-package io.github.aaaamirabbas.edge.ext
+package io.github.aaaamirabbas.edge.ext.view
 
 import android.annotation.SuppressLint
 import android.content.Context

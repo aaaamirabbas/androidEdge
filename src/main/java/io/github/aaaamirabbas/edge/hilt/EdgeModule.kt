@@ -7,13 +7,14 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import io.github.aaaamirabbas.edge.domain.provider.local.ObjectPool
 import io.github.aaaamirabbas.edge.utils.gson.GsonUtils
 import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object CommonModule {
+object EdgeModule {
 
     @Singleton
     @Provides
@@ -28,4 +29,8 @@ object CommonModule {
     @Singleton
     @Provides
     fun provideGsonUtils(gson: Gson) = GsonUtils(gson)
+
+    @Singleton
+    @Provides
+    fun provideObjectPool() = ObjectPool()
 }
