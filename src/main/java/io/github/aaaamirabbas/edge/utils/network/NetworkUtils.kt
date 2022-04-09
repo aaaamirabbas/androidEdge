@@ -2,10 +2,8 @@ package io.github.aaaamirabbas.edge.utils.network
 
 import android.content.Context
 import android.net.ConnectivityManager
-import io.github.aaaamirabbas.edge.ext.flowIO
-import io.github.aaaamirabbas.edge.utils.crashlytics.CrashlyticsUtils
+import io.github.aaaamirabbas.edge.ext.other.flowOnIO
 import kotlinx.coroutines.delay
-import java.io.IOException
 import java.net.InetSocketAddress
 import java.net.Socket
 
@@ -20,7 +18,7 @@ object NetworkUtils {
         return networkInfo != null && networkInfo.isConnected
     }
 
-    suspend fun subscribeOnlineStatus(url: String) = flowIO<Boolean> {
+    suspend fun subscribeOnlineStatus(url: String) = flowOnIO<Boolean> {
         while (true) {
             runCatching {
                 Socket().apply {

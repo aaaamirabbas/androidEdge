@@ -1,6 +1,6 @@
 package io.github.aaaamirabbas.edge.utils.crashlytics
 
-import io.github.aaaamirabbas.edge.ext.logE
+import io.github.aaaamirabbas.edge.ext.other.logE
 
 
 object CrashlyticsUtils {

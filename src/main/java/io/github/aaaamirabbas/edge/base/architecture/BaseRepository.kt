@@ -1,4 +1,4 @@
-package io.github.aaaamirabbas.edge.base.mvvm
+package io.github.aaaamirabbas.edge.base.architecture
 
 import io.github.aaaamirabbas.edge.utils.data.Resource
 import retrofit2.Response
