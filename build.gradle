@@ -143,4 +143,7 @@ dependencies {
     //chuck er
     debugApi("com.github.chuckerteam.chucker:library:$chuckerV")
     releaseApi("com.github.chuckerteam.chucker:library-no-op:$chuckerV")
+
+    //leakcanary
+    debugApi ("com.squareup.leakcanary:leakcanary-android:$leakcanaryV")
 }
