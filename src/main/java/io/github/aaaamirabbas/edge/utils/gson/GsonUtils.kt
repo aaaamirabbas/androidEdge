@@ -8,6 +8,14 @@ import javax.inject.Inject
 class GsonUtils @Inject constructor(
     val gson: Gson
 ) {
+    fun toJson(obj: Any): String {
+        return gson.toJson(obj)
+    }
+
+    fun toJsonTree(obj: Any): JsonElement {
+        return gson.toJsonTree(obj)
+    }
+
     inline fun <reified T> getObject(json: String): T {
         return gson.fromJson(json, T::class.java)
     }
@@ -26,13 +34,5 @@ class GsonUtils @Inject constructor(
 
     inline fun <reified MODEL> getSafeObjectList(json: String): Result<List<MODEL>> {
         return runCatching { gson.fromJson(json, object : TypeToken<ArrayList<MODEL>>() {}.type) }
-    }
-
-    fun toJson(obj: Any): String {
-        return gson.toJson(obj)
-    }
-
-    fun toJsonTree(obj: Any): JsonElement {
-        return gson.toJsonTree(obj)
     }
 }

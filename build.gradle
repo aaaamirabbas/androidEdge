@@ -119,7 +119,7 @@ dependencies {
 
     //gSon
     api("com.google.code.gson:gson:$gsonV")
-    api("com.squareup.moshi:moshi-kotlin:$moshiV")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:$moshiV")
 
     //reactor
     api("com.github.aaaamirabbas:reactor:$reactorV")
