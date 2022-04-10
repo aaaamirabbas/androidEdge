@@ -1,6 +1,7 @@
 package io.github.aaaamirabbas.edge.hilt
 
 import com.google.gson.Gson
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,5 +16,11 @@ object NetworkModule {
     @Provides
     fun provideGson(): Gson {
         return Gson()
+    }
+
+    @Singleton
+    @Provides
+    fun provideMoshi(): Moshi {
+        return Moshi.Builder().build()
     }
 }

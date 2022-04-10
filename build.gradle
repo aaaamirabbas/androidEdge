@@ -110,6 +110,7 @@ dependencies {
 
     //retrofit
     api("com.squareup.retrofit2:retrofit:$retrofitV")
+    api("com.squareup.retrofit2:converter-moshi:$retrofitV")
     api("com.squareup.retrofit2:converter-gson:$retrofitGsonV")
 
     //ok http
@@ -118,7 +119,7 @@ dependencies {
 
     //gSon
     api("com.google.code.gson:gson:$gsonV")
-    api("com.squareup.moshi:moshi:1.13.0")
+    api("com.squareup.moshi:moshi-kotlin:$moshiV")
 
     //reactor
     api("com.github.aaaamirabbas:reactor:$reactorV")

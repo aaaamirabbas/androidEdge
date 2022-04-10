@@ -3,12 +3,14 @@ package io.github.aaaamirabbas.edge.hilt
 import android.content.Context
 import com.aaaamirabbas.reactor.handler.Reactor
 import com.google.gson.Gson
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.github.aaaamirabbas.edge.domain.provider.local.ObjectPool
 import io.github.aaaamirabbas.edge.utils.gson.GsonUtils
+import io.github.aaaamirabbas.edge.utils.moshi.MoshiUtils
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -29,6 +31,10 @@ object EdgeModule {
     @Singleton
     @Provides
     fun provideGsonUtils(gson: Gson) = GsonUtils(gson)
+
+    @Singleton
+    @Provides
+    fun provideMoshiUtils(moshi: Moshi) = MoshiUtils(moshi)
 
     @Singleton
     @Provides
