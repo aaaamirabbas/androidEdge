@@ -1,6 +1,8 @@
 package io.github.aaaamirabbas.edge.base.architecture
 
 import io.github.aaaamirabbas.edge.domain.model.other.FailureModel
+import io.github.aaaamirabbas.edge.ext.other.asyncIO
+import io.github.aaaamirabbas.edge.ext.other.withIO
 import io.github.aaaamirabbas.edge.utils.dateTime.TimeUtils
 import io.github.aaaamirabbas.edge.utils.operation.OperationResult
 import retrofit2.Response
@@ -9,6 +11,7 @@ abstract class BaseRepository {
     suspend fun <T> getResult(call: suspend () -> Response<T>): OperationResult<T> {
         try {
             val response = call()
+
             if (response.isSuccessful) {
                 response.body()?.let {
                     return OperationResult.success(it)

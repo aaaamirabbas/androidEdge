@@ -24,6 +24,10 @@ android {
         debug {
             ext.enableCrashlytics = false
             ext.alwaysUpdateBuildId = false
+
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                    'proguard-rules.pro'
         }
 
         release {
@@ -111,14 +115,12 @@ dependencies {
     //retrofit
     api("com.squareup.retrofit2:retrofit:$retrofitV")
     api("com.squareup.retrofit2:converter-moshi:$retrofitV")
-    api("com.squareup.retrofit2:converter-gson:$retrofitGsonV")
 
     //ok http
     api("com.squareup.okhttp3:okhttp:$okHttpV")
-    api("com.squareup.okhttp3:logging-interceptor:$okHttpV")
 
-    //gSon
-    api("com.google.code.gson:gson:$gsonV")
+    //moshi
+    api("com.squareup.moshi:moshi-kotlin:$moshiV")
     kapt("com.squareup.moshi:moshi-kotlin-codegen:$moshiV")
 
     //reactor
@@ -137,4 +139,8 @@ dependencies {
     //ste tho
     api("com.facebook.stetho:stetho:$stethoV")
     api("com.facebook.stetho:stetho-okhttp3:$stethoV")
+
+    //chuck er
+    debugApi("com.github.chuckerteam.chucker:library:$chuckerV")
+    releaseApi("com.github.chuckerteam.chucker:library-no-op:$chuckerV")
 }
