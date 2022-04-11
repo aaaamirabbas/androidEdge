@@ -114,14 +114,13 @@ dependencies {
 
     //retrofit
     api("com.squareup.retrofit2:retrofit:$retrofitV")
-    api("com.squareup.retrofit2:converter-moshi:$retrofitV")
+    api("com.squareup.retrofit2:converter-gson:$retrofitV")
 
     //ok http
     api("com.squareup.okhttp3:okhttp:$okHttpV")
 
-    //moshi
-    api("com.squareup.moshi:moshi-kotlin:$moshiV")
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:$moshiV")
+    //gson
+    api("com.google.code.gson:gson:$gsonV")
 
     //reactor
     api("com.github.aaaamirabbas:reactor:$reactorV")
@@ -145,5 +144,5 @@ dependencies {
     releaseApi("com.github.chuckerteam.chucker:library-no-op:$chuckerV")
 
     //leakcanary
-    debugApi ("com.squareup.leakcanary:leakcanary-android:$leakcanaryV")
+    debugApi("com.squareup.leakcanary:leakcanary-android:$leakcanaryV")
 }

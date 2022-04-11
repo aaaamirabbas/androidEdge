@@ -1,7 +1,6 @@
 package io.github.aaaamirabbas.edge.hilt
 
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,8 +13,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideMoshi(): Moshi {
-        return Moshi.Builder()
-            .add(KotlinJsonAdapterFactory()).build()
+    fun provideGson(): Gson {
+        return Gson()
     }
 }
