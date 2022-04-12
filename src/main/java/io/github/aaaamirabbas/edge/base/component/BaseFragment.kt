@@ -17,9 +17,9 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
     lateinit var activityContext: AppCompatActivity
 
-    abstract fun start(view: View, savedInstanceState: Bundle?)
-    abstract fun applyView()
-    abstract fun observesLiveData()
+    open fun applyView(view: View, savedInstanceState: Bundle?) {}
+    open fun applyStart() {}
+    open fun applyObserves() {}
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -38,9 +38,9 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        start(view, savedInstanceState)
-        applyView()
-        observesLiveData()
+        applyView(view, savedInstanceState)
+        applyStart()
+        applyObserves()
     }
 
     override fun onAttach(context: Context) {

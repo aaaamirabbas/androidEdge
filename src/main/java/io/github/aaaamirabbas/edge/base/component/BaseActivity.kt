@@ -14,9 +14,9 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
     private var _binding: ViewBinding? = null
     abstract val bindingInflater: (LayoutInflater) -> VB
 
-    abstract fun start(savedInstanceState: Bundle?)
-    abstract fun applyView()
-    abstract fun observesLiveData()
+    open fun applyView(savedInstanceState: Bundle?) {}
+    open fun applyStart() {}
+    open fun applyObserves() {}
 
     @Suppress("UNCHECKED_CAST")
     val binding: VB?
@@ -33,9 +33,9 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
         _binding = bindingInflater.invoke(layoutInflater)
         setContentView(requireNotNull(_binding).root)
 
-        start(savedInstanceState)
-        applyView()
-        observesLiveData()
+        applyView(savedInstanceState)
+        applyStart()
+        applyObserves()
     }
 
     override fun attachBaseContext(newBase: Context) {
