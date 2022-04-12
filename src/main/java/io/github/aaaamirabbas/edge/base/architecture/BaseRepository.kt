@@ -1,6 +1,7 @@
 package io.github.aaaamirabbas.edge.base.architecture
 
 import io.github.aaaamirabbas.edge.domain.model.other.FailureModel
+import io.github.aaaamirabbas.edge.ext.other.IECODE
 import io.github.aaaamirabbas.edge.utils.dateTime.TimeUtils
 import io.github.aaaamirabbas.edge.utils.operation.OperationResult
 import retrofit2.Response
@@ -18,7 +19,6 @@ abstract class BaseRepository {
 
             return OperationResult.failure(
                 FailureModel(
-                    TimeUtils.getCurrentMillis(),
                     response.code(),
                     response.message()
                 )
@@ -26,9 +26,7 @@ abstract class BaseRepository {
         } catch (e: Exception) {
             return OperationResult.failure(
                 FailureModel(
-                    TimeUtils.getCurrentMillis(),
-                    -1,
-                    e.message ?: e.stackTrace.toString()
+                    IECODE, e.message ?: e.stackTrace.toString()
                 )
             )
         }

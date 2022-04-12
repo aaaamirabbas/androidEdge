@@ -3,6 +3,7 @@ package io.github.aaaamirabbas.edge.base.architecture
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.github.aaaamirabbas.edge.domain.model.other.FailureModel
+import io.github.aaaamirabbas.edge.ext.other.IECODE
 import io.github.aaaamirabbas.edge.ext.other.flowOnIO
 import io.github.aaaamirabbas.edge.ext.other.launchOnViewModelIO
 import io.github.aaaamirabbas.edge.ext.other.launchOnViewModelMain
@@ -27,7 +28,7 @@ abstract class BaseViewModel : ViewModel() {
             result(
                 OperationResult.failure(
                     FailureModel(
-                        TimeUtils.getCurrentMillis(), -1, "error"
+                        IECODE, "error"
                     )
                 )
             )
