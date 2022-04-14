@@ -19,3 +19,9 @@ fun <T> Activity.restartApp(launcher: Class<T>, bundle: Bundle? = null) {
     finish()
     Runtime.getRuntime().exit(0)
 }
+
+fun Activity.replaceWith(clazz: Class<*>) {
+    startActivity(Intent(applicationContext, clazz).apply {
+        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    }).also { finish() }
+}
