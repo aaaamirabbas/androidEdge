@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import androidx.appcompat.view.ContextThemeWrapper
 import androidx.viewbinding.ViewBinding
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
-abstract class BaseFragment<VB : ViewBinding> : Fragment(), BaseView {
+abstract class BaseSheetFragment<VB : ViewBinding> :
+    BottomSheetDialogFragment(), BaseView {
 
     var binding: VB? = null
     abstract val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB
@@ -26,7 +28,12 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment(), BaseView {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = bindingInflater.invoke(inflater, container, false)
+        super.onCreateView(inflater, container, savedInstanceState)
+        val contextThemeWrapper = ContextThemeWrapper(requireContext(), theme)
+        binding = bindingInflater.invoke(
+            inflater.cloneInContext(contextThemeWrapper), container, false
+        )
+
         return requireNotNull(binding).root
     }
 

@@ -34,4 +34,13 @@ abstract class BaseViewModel : ViewModel() {
             )
         }.collect { result(it) }
     }
+
+    fun <T> performExec(
+        operation: suspend () -> T,
+        result: (T) -> Unit,
+    ) = launchOnViewModelIO {
+        operation().also {
+            result(it)
+        }
+    }
 }

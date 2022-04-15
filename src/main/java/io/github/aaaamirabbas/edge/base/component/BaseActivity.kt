@@ -9,14 +9,11 @@ import androidx.viewbinding.ViewBinding
 import io.github.aaaamirabbas.edge.utils.language.LocaleUtils
 
 
-abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
+abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity(),
+    BaseView {
 
     private var _binding: ViewBinding? = null
     abstract val bindingInflater: (LayoutInflater) -> VB
-
-    open fun applyView(savedInstanceState: Bundle?) {}
-    open fun applyStart() {}
-    open fun applyObserves() {}
 
     @Suppress("UNCHECKED_CAST")
     val binding: VB?

@@ -145,4 +145,8 @@ dependencies {
 
     //leakcanary
     debugApi("com.squareup.leakcanary:leakcanary-android:$leakcanaryV")
+
+    //room
+    api ("androidx.room:room-runtime:$roomV")
+    kapt ("androidx.room:room-compiler:$roomV")
 }

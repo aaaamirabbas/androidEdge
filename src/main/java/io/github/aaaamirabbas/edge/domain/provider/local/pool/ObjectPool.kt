@@ -1,4 +1,4 @@
-package io.github.aaaamirabbas.edge.domain.provider.local
+package io.github.aaaamirabbas.edge.domain.provider.local.pool
 
 
 class ObjectPool {
