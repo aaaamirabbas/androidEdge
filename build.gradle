@@ -15,7 +15,7 @@ android {
         targetSdk targetV
 
         vectorDrawables.useSupportLibrary = true
-        resConfigs "en", "fa"
+        resConfigs 'en', 'fa'
 
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -59,15 +59,17 @@ android {
     buildFeatures {
         viewBinding true
     }
-
-    lintOptions {
-        checkDependencies true
-        checkReleaseBuilds false
-        abortOnError false
+    packagingOptions {
+        resources {
+            excludes += ['META-INF/library_release.kotlin_module']
+        }
     }
 
-    packagingOptions {
-        exclude 'META-INF/library_release.kotlin_module'
+
+    lint {
+        abortOnError false
+        checkDependencies true
+        checkReleaseBuilds false
     }
 }
 
