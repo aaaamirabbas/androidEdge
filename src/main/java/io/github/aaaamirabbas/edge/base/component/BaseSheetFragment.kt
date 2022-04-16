@@ -12,7 +12,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
 abstract class BaseSheetFragment<VB : ViewBinding> :
-    BottomSheetDialogFragment(), BaseView {
+    BottomSheetDialogFragment(), BaseFragmentView {
 
     var binding: VB? = null
     abstract val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB

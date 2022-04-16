@@ -13,22 +13,22 @@ object PermissionUtils {
         fun observe(permissions: Map<String, Boolean>)
     }
 
-    private lateinit var resultContract: ActivityResultLauncher<Array<String>>
-
     fun requestPermission(
-        activity: AppCompatActivity, permissions: Array<String>,
+        activity: AppCompatActivity,
+        resultContract: ActivityResultLauncher<Array<String>>,
+        permissions: Array<String>,
     ) {
         val isNotGranted = permissions.any { !isGranted(activity, it) }
         if (isNotGranted) {
-            request(permissions)
+            request(permissions, resultContract)
         }
     }
 
     fun register(
         activity: AppCompatActivity,
         listener: PermissionListener,
-    ) {
-        resultContract = activity.registerForActivityResult(
+    ): ActivityResultLauncher<Array<String>> {
+        return activity.registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
         ) { permissions ->
             listener.observe(permissions)
@@ -37,6 +37,7 @@ object PermissionUtils {
 
     private fun request(
         permissionList: Array<String>,
+        resultContract: ActivityResultLauncher<Array<String>>
     ) {
         resultContract.launch(permissionList)
     }

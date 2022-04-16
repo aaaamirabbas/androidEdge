@@ -10,7 +10,7 @@ import io.github.aaaamirabbas.edge.utils.language.LocaleUtils
 
 
 abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity(),
-    BaseView {
+    BaseActivityView {
 
     private var _binding: ViewBinding? = null
     abstract val bindingInflater: (LayoutInflater) -> VB

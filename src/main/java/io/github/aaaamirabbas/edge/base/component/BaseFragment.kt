@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
 
-abstract class BaseFragment<VB : ViewBinding> : Fragment(), BaseView {
+abstract class BaseFragment<VB : ViewBinding> : Fragment(), BaseFragmentView {
 
     var binding: VB? = null
     abstract val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB
