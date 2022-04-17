@@ -6,6 +6,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 
 object PermissionUtils {
 
@@ -13,25 +14,32 @@ object PermissionUtils {
         fun observe(permissions: Map<String, Boolean>)
     }
 
-    fun requestPermission(
-        activity: AppCompatActivity,
-        resultContract: ActivityResultLauncher<Array<String>>,
-        permissions: Array<String>,
-    ) {
-        val isNotGranted = permissions.any { !isGranted(activity, it) }
-        if (isNotGranted) {
-            request(permissions, resultContract)
-        }
-    }
-
     fun register(
         activity: AppCompatActivity,
         listener: PermissionListener,
-    ): ActivityResultLauncher<Array<String>> {
-        return activity.registerForActivityResult(
-            ActivityResultContracts.RequestMultiplePermissions()
-        ) { permissions ->
-            listener.observe(permissions)
+    ) = activity.registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        listener.observe(permissions)
+    }
+
+    fun register(
+        parent: Fragment,
+        listener: PermissionListener,
+    ) = parent.registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        listener.observe(permissions)
+    }
+
+    fun requestPermission(
+        context: Context,
+        resultContract: ActivityResultLauncher<Array<String>>,
+        permissions: Array<String>,
+    ) {
+        val isNotGranted = permissions.any { !isGranted(context, it) }
+        if (isNotGranted) {
+            request(permissions, resultContract)
         }
     }
 
