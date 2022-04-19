@@ -78,7 +78,6 @@ dependencies {
     //ktx
     api("androidx.core:core-ktx:$ktxV")
 
-
     //android
     api("androidx.appcompat:appcompat:$appcompatV")
     api("androidx.fragment:fragment-ktx:$fragmentKTXV")
