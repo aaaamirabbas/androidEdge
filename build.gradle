@@ -148,6 +148,11 @@ dependencies {
     debugApi("com.squareup.leakcanary:leakcanary-android:$leakcanaryV")
 
     //room
-    api ("androidx.room:room-runtime:$roomV")
-    kapt ("androidx.room:room-compiler:$roomV")
+    api("androidx.room:room-runtime:$roomV")
+    kapt("androidx.room:room-compiler:$roomV")
+
+
+    //paging
+    api("androidx.paging:paging-runtime:$pagingV")
+
 }
