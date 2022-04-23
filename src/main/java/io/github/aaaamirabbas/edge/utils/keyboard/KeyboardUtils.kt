@@ -7,7 +7,7 @@ import io.github.aaaamirabbas.edge.ext.other.logE
 
 object KeyboardUtils {
 
-    fun showKeyboard(view: View) {
+    fun open(view: View) {
         view.requestFocus()
         try {
             val inputMethodManager =
