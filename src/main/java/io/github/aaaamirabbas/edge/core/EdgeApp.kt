@@ -4,6 +4,7 @@ import android.app.Application
 
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
+import com.facebook.stetho.BuildConfig
 import com.facebook.stetho.Stetho
 import io.github.aaaamirabbas.edge.utils.language.LocaleUtils
 
@@ -11,7 +12,15 @@ open class EdgeApp : Application() {
     override fun onCreate() {
         super.onCreate()
         LocaleUtils.setLocale(this)
-        Stetho.initializeWithDefaults(this)
+
+        if (BuildConfig.DEBUG) {
+            Stetho.initialize(
+                Stetho.newInitializerBuilder(this)
+                    .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+                    .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
+                    .build()
+            )
+        }
     }
 
     //config language for all application
