@@ -1,6 +1,5 @@
 package io.github.aaaamirabbas.edge.utils.security
 
-import android.util.Base64
 import io.github.aaaamirabbas.edge.utils.crashlytics.CrashlyticsUtils
 import java.io.UnsupportedEncodingException
 import java.security.GeneralSecurityException
@@ -34,13 +33,11 @@ object AESUtils {
     fun encrypt(password: String, message: String): String {
         try {
             val key = generateKey(password)
-            val cipherText = encrypt(key, ivBytes, message.toByteArray(Charsets.UTF_8))
-            return Base64.encodeToString(cipherText, Base64.NO_WRAP)
+            val cipherText = encrypt(key, ivBytes,
+                message.toByteArray(Charsets.UTF_8))
+            return String(cipherText, Charsets.UTF_8)
         } catch (e: UnsupportedEncodingException) {
-            CrashlyticsUtils.captureException(
-                e, this::class.simpleName
-            )
-            CrashlyticsUtils.captureException(e)
+            CrashlyticsUtils.capture(e, this)
             throw GeneralSecurityException(e)
         }
     }
@@ -55,17 +52,14 @@ object AESUtils {
     }
 
     @Throws(GeneralSecurityException::class)
-    fun decrypt(password: String, base64EncodedCipherText: String): String {
+    fun decrypt(password: String, encodedText: String): String {
         try {
             val key = generateKey(password)
-            val decodedCipherText = Base64.decode(base64EncodedCipherText, Base64.NO_WRAP)
-            val decryptedBytes = decrypt(key, ivBytes, decodedCipherText)
-
+            val decryptedBytes = decrypt(key, ivBytes,
+                encodedText.toByteArray(Charsets.UTF_8))
             return String(decryptedBytes, Charsets.UTF_8)
         } catch (e: UnsupportedEncodingException) {
-            CrashlyticsUtils.captureException(
-                e, this::class.simpleName
-            )
+            CrashlyticsUtils.capture(e, this)
             throw GeneralSecurityException(e)
         }
     }

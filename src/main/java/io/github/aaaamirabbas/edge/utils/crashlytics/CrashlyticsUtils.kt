@@ -4,8 +4,8 @@ import io.github.aaaamirabbas.edge.ext.other.logE
 
 
 object CrashlyticsUtils {
-    fun captureException(e: Throwable, className: String? = "") {
+    fun capture(e: Throwable, parent: Any = Any()) {
         e.printStackTrace()
-        "$className: ${e.stackTraceToString()}".logE()
+        "${parent::class.simpleName ?: 'X'}: ${e.stackTraceToString()}".logE()
     }
 }
