@@ -17,9 +17,16 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment(), BaseFragmentView {
 
     lateinit var activityContext: AppCompatActivity
 
+    private var isExistInBackStack = false
+
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        isExistInBackStack = false
     }
 
     override fun onCreateView(
@@ -36,10 +43,22 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment(), BaseFragmentView {
         applyView(view, savedInstanceState)
         applyStart()
         applyObserves()
+
+        isExistInBackStack = true
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activityContext = context as BaseActivity<*>
+    }
+
+    fun isExistInBackStack(): Boolean {
+        return isExistInBackStack
+    }
+
+    fun execWhenNotExistInStack(action: () -> Unit) {
+        if (!isExistInBackStack) {
+            action()
+        }
     }
 }

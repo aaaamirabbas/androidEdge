@@ -6,9 +6,9 @@ fun Any.logE(tag: String = "", throwable: Throwable? = null) {
     Log.e(tag, "log -> $this\n", throwable)
 }
 
-inline fun <reified NEW> Any.cast(): NEW? {
-    return if (this.isCastable<NEW>())
-        this as NEW
+inline fun <reified T> Any.cast(): T? {
+    return if (this.isCastable<T>())
+        this as T
     else null
 }
 

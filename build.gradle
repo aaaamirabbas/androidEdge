@@ -145,7 +145,7 @@ dependencies {
     releaseApi("com.github.chuckerteam.chucker:library-no-op:$chuckerV")
 
     //leakcanary
-    debugApi("com.squareup.leakcanary:leakcanary-android:$leakcanaryV")
+//    debugApi("com.squareup.leakcanary:leakcanary-android:$leakcanaryV")
 
     //room
     api("androidx.room:room-runtime:$roomV")
