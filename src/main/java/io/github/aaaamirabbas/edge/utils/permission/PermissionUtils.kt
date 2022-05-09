@@ -35,24 +35,26 @@ object PermissionUtils {
     fun requestPermission(
         context: Context,
         resultContract: ActivityResultLauncher<Array<String>>,
-        permissions: Array<String>,
+        vararg permissions: String,
     ) {
         val isNotGranted = permissions.any { !isGranted(context, it) }
         if (isNotGranted) {
-            request(permissions, resultContract)
+            request(resultContract, *permissions)
         }
     }
 
     private fun request(
-        permissionList: Array<String>,
-        resultContract: ActivityResultLauncher<Array<String>>
+        resultContract: ActivityResultLauncher<Array<String>>,
+        vararg permissions: String
     ) {
-        resultContract.launch(permissionList)
+        resultContract.launch(permissions.toList().toTypedArray())
     }
 
-    fun isGranted(context: Context, permission: String): Boolean {
-        return ContextCompat.checkSelfPermission(
-            context, permission
-        ) == PackageManager.PERMISSION_GRANTED
+    fun isGranted(context: Context, vararg permissions: String): Boolean {
+        return permissions.toList().any {
+            ContextCompat.checkSelfPermission(
+                context, it
+            ) == PackageManager.PERMISSION_GRANTED
+        }
     }
 }
