@@ -1,8 +1,8 @@
 package io.github.aaaamirabbas.edge.ext.other
 
 
-fun <T> Collection<T>.logE(tag: String = "", throwable: Throwable? = null) {
+fun <T> Collection<T>.logI(tag: String = "", throwable: Throwable? = null) {
     this.forEach {
-        it?.logE(tag, throwable)
+        it?.logI(tag, throwable)
     }
 }

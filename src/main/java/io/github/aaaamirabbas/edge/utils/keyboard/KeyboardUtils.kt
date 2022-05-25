@@ -3,7 +3,7 @@ package io.github.aaaamirabbas.edge.utils.keyboard
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import io.github.aaaamirabbas.edge.ext.other.logE
+import io.github.aaaamirabbas.edge.ext.other.logI
 
 object KeyboardUtils {
 
@@ -14,7 +14,7 @@ object KeyboardUtils {
                 view.context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
         } catch (e: java.lang.Exception) {
-            "showKeyboard failed, error: $e".logE("showKeyboard")
+            "showKeyboard failed, error: $e".logI("showKeyboard")
         }
     }
 

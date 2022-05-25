@@ -13,6 +13,16 @@ import kotlinx.coroutines.flow.catch
 
 abstract class BaseViewModel : ViewModel() {
 
+    init {
+        setup()
+    }
+
+    private fun setup() {
+        onStart()
+    }
+
+    open fun onStart() {}
+
     fun <T> MutableLiveData<T>.setSafeValue(t: T?) {
         launchOnViewModelMain { value = t }
     }
@@ -28,7 +38,7 @@ abstract class BaseViewModel : ViewModel() {
             result(
                 OperationResult.failure(
                     FailureModel(
-                        IECODE, "error"
+                        IECODE, "local error"
                     )
                 )
             )

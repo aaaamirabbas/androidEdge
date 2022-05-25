@@ -1,7 +1,7 @@
 package io.github.aaaamirabbas.edge.ext.other
 
-fun Map<*, *>.logE(tag: String = "", throwable: Throwable? = null) {
+fun Map<*, *>.logI(tag: String = "", throwable: Throwable? = null) {
     this.forEach {
-        "${it.key}: ${it.value}".logE(tag, throwable)
+        "${it.key}: ${it.value}".logI(tag, throwable)
     }
 }
