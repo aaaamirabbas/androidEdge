@@ -59,6 +59,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+
     packagingOptions {
         resources {
             excludes += ['META-INF/library_release.kotlin_module']
