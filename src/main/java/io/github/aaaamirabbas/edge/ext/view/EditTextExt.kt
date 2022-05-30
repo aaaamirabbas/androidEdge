@@ -6,8 +6,9 @@ import android.widget.EditText
 import io.github.aaaamirabbas.edge.ext.other.debounce
 import kotlinx.coroutines.CoroutineScope
 
-fun EditText.textString() =
-    this.text.toString()
+fun EditText.textString() = this.text.toString()
+
+fun EditText.clearText() = this.setText("")
 
 fun EditText.onChange(
     waitMs: Long = 800L,
