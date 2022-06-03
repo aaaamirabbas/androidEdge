@@ -30,9 +30,8 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity(),
         _binding = bindingInflater.invoke(layoutInflater)
         setContentView(requireNotNull(_binding).root)
 
-        applyView(savedInstanceState)
-        applyStart()
-        applyObserves()
+        onViewHandler(savedInstanceState)
+        onLifeCycleHandler()
     }
 
     override fun attachBaseContext(newBase: Context) {

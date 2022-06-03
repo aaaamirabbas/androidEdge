@@ -40,9 +40,8 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment(), BaseFragmentView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        applyView(view, savedInstanceState)
-        applyStart()
-        applyObserves()
+        onViewHandler(view, savedInstanceState)
+        onLifeCycleHandler()
 
         isExistInBackStack = true
     }
