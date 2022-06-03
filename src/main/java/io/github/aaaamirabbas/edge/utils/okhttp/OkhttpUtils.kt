@@ -17,9 +17,9 @@ object OkhttpUtils {
         return image.toRequestBody("image/*".toMediaTypeOrNull())
     }
 
-    fun getImagePart(file: File): MultipartBody.Part {
+    fun getImagePart(file: File, partFileName: String): MultipartBody.Part {
         return MultipartBody.Part.createFormData(
-            "file", file.name,
+            partFileName, file.name,
             file.asRequestBody("image/*".toMediaTypeOrNull())
         )
     }

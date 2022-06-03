@@ -40,9 +40,9 @@ abstract class BaseSheetFragment<VB : ViewBinding> :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        applyView(view, savedInstanceState)
-        applyStart()
-        applyObserves()
+        onViewHandler(view, savedInstanceState)
+        onLifeCycleHandler()
+        onLifeCycleHandler()
     }
 
     override fun onAttach(context: Context) {

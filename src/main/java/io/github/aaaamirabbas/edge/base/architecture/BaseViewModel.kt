@@ -3,26 +3,12 @@ package io.github.aaaamirabbas.edge.base.architecture
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.github.aaaamirabbas.edge.domain.model.other.FailureModel
-import io.github.aaaamirabbas.edge.ext.other.IECODE
-import io.github.aaaamirabbas.edge.ext.other.flowOnIO
-import io.github.aaaamirabbas.edge.ext.other.launchOnViewModelIO
-import io.github.aaaamirabbas.edge.ext.other.launchOnViewModelMain
+import io.github.aaaamirabbas.edge.ext.other.*
 import io.github.aaaamirabbas.edge.utils.dateTime.TimeUtils
 import io.github.aaaamirabbas.edge.utils.operation.OperationResult
 import kotlinx.coroutines.flow.catch
 
 abstract class BaseViewModel : ViewModel() {
-
-    init {
-        setup()
-    }
-
-    private fun setup() {
-        onStart()
-    }
-
-    open fun onStart() {}
-
     fun <T> MutableLiveData<T>.setSafeValue(t: T?) {
         launchOnViewModelMain { value = t }
     }
@@ -42,7 +28,9 @@ abstract class BaseViewModel : ViewModel() {
                     )
                 )
             )
-        }.collect { result(it) }
+        }.collect {
+            result(it)
+        }
     }
 
     fun <T> performExec(
