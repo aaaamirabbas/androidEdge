@@ -42,7 +42,6 @@ abstract class BaseSheetFragment<VB : ViewBinding> :
 
         onViewHandler(view, savedInstanceState)
         onLifeCycleHandler()
-        onLifeCycleHandler()
     }
 
     override fun onAttach(context: Context) {

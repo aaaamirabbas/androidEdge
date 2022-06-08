@@ -3,11 +3,11 @@ package io.github.aaaamirabbas.edge.ext.other
 import android.util.Log
 
 fun Any.logE(tag: String = "", throwable: Throwable? = null) {
-    Log.e(tag, "ERROR -> $this\n", throwable)
+    Log.e(tag, "E -> $this\n", throwable)
 }
 
 fun Any.logI(tag: String = "", throwable: Throwable? = null) {
-    Log.i(tag, "INFO -> $this\n", throwable)
+    Log.i(tag, "I -> $this\n", throwable)
 }
 
 inline fun <reified T> Any.cast(): T? {
