@@ -16,7 +16,6 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment(), BaseFragmentView {
     abstract val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB
 
     lateinit var activityContext: AppCompatActivity
-
     private var isExistInBackStack = false
 
     override fun onDestroyView() {

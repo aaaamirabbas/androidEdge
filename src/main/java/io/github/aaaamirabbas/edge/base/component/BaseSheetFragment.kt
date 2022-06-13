@@ -18,10 +18,16 @@ abstract class BaseSheetFragment<VB : ViewBinding> :
     abstract val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB
 
     lateinit var activityContext: AppCompatActivity
+    private var isExistInBackStack = false
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        isExistInBackStack = false
     }
 
     override fun onCreateView(
@@ -42,10 +48,22 @@ abstract class BaseSheetFragment<VB : ViewBinding> :
 
         onViewHandler(view, savedInstanceState)
         onLifeCycleHandler()
+
+        isExistInBackStack = true
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activityContext = context as BaseActivity<*>
+    }
+
+    fun isExistInBackStack(): Boolean {
+        return isExistInBackStack
+    }
+
+    fun execWhenNotExistInStack(action: () -> Unit) {
+        if (!isExistInBackStack) {
+            action()
+        }
     }
 }
