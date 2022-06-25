@@ -5,25 +5,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
-abstract class BaseSheetFragment<VB : ViewBinding> :
-    BottomSheetDialogFragment(), BaseFragmentView {
+abstract class BaseSheetFragment<VB : ViewBinding>(
+    private val bindingFactory: (LayoutInflater, ViewGroup?, Boolean) -> VB
+) : BottomSheetDialogFragment(), BaseFragmentView {
 
-    var binding: VB? = null
-    abstract val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB
+    lateinit var binding: VB
 
-    lateinit var activityContext: AppCompatActivity
+    lateinit var baseActivity: BaseActivity<*>
     private var isExistInBackStack = false
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
-    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -36,11 +30,11 @@ abstract class BaseSheetFragment<VB : ViewBinding> :
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         val contextThemeWrapper = ContextThemeWrapper(requireContext(), theme)
-        binding = bindingInflater.invoke(
+        binding = bindingFactory(
             inflater.cloneInContext(contextThemeWrapper), container, false
         )
 
-        return requireNotNull(binding).root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,7 +48,7 @@ abstract class BaseSheetFragment<VB : ViewBinding> :
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activityContext = context as BaseActivity<*>
+        baseActivity = context as BaseActivity<*>
     }
 
     fun isExistInBackStack(): Boolean {

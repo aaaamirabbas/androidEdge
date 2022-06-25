@@ -157,8 +157,8 @@ dependencies {
     api("androidx.paging:paging-runtime:$pagingV")
 
     api platform("com.google.firebase:firebase-bom:$firebaseBomV")
-    api ('com.google.firebase:firebase-analytics-ktx')
-    api ('com.google.firebase:firebase-crashlytics-ktx')
-    api ('com.google.firebase:firebase-auth-ktx')
+    api('com.google.firebase:firebase-analytics-ktx')
+    api('com.google.firebase:firebase-crashlytics-ktx')
+    api('com.google.firebase:firebase-auth-ktx')
 
 }

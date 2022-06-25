@@ -9,26 +9,16 @@ import androidx.viewbinding.ViewBinding
 import io.github.aaaamirabbas.edge.utils.language.LocaleUtils
 
 
-abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity(),
-    BaseActivityView {
+abstract class BaseActivity<VB : ViewBinding>(
+    private val bindingFactory: (LayoutInflater) -> VB
+) : AppCompatActivity(), BaseActivityView {
 
-    private var _binding: ViewBinding? = null
-    abstract val bindingInflater: (LayoutInflater) -> VB
-
-    @Suppress("UNCHECKED_CAST")
-    val binding: VB?
-        get() = _binding as VB?
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
+    val binding: VB by lazy { bindingFactory(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         LocaleUtils.setLocale(this)
-        _binding = bindingInflater.invoke(layoutInflater)
-        setContentView(requireNotNull(_binding).root)
+        setContentView(binding.root)
 
         onViewHandler(savedInstanceState)
         onLifeCycleHandler()

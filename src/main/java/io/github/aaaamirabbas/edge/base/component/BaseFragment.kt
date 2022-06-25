@@ -5,23 +5,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
 
-abstract class BaseFragment<VB : ViewBinding> : Fragment(), BaseFragmentView {
+abstract class BaseFragment<VB : ViewBinding>(
+    private val bindingFactory: (LayoutInflater, ViewGroup?, Boolean) -> VB
+) : Fragment(), BaseFragmentView {
 
-    var binding: VB? = null
-    abstract val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB
+    lateinit var binding: VB
 
-    lateinit var activityContext: AppCompatActivity
+    lateinit var baseActivity: BaseActivity<*>
     private var isExistInBackStack = false
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
-    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -32,8 +27,8 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment(), BaseFragmentView {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = bindingInflater.invoke(inflater, container, false)
-        return requireNotNull(binding).root
+        binding = bindingFactory.invoke(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,7 +42,7 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment(), BaseFragmentView {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activityContext = context as BaseActivity<*>
+        baseActivity = context as BaseActivity<*>
     }
 
     fun isExistInBackStack(): Boolean {
