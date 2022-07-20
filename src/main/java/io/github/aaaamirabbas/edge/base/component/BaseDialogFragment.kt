@@ -1,18 +1,21 @@
 package io.github.aaaamirabbas.edge.base.component
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.viewbinding.ViewBinding
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
-abstract class BaseSheetFragment<VB : ViewBinding>(
+abstract class BaseDialogFragment<VB : ViewBinding>(
     private val bindingFactory: (LayoutInflater, ViewGroup?, Boolean) -> VB
-) : BottomSheetDialogFragment(), BaseFragmentView {
+) : AppCompatDialogFragment(), BaseFragmentView {
 
     lateinit var binding: VB
 
@@ -24,6 +27,14 @@ abstract class BaseSheetFragment<VB : ViewBinding>(
         isExistInBackStack = false
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        dialog?.apply {
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,7 +44,7 @@ abstract class BaseSheetFragment<VB : ViewBinding>(
             requireActivity(), requireActivity().theme
         )
 
-        binding = bindingFactory(
+        binding = bindingFactory.invoke(
             inflater.cloneInContext(contextThemeWrapper), container, false
         )
 
