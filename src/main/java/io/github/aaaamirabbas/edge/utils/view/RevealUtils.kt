@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.view.View
 import android.view.ViewAnimationUtils
+import androidx.annotation.Keep
 import io.github.aaaamirabbas.edge.ext.view.toDisable
 import io.github.aaaamirabbas.edge.ext.view.toEnable
 import io.github.aaaamirabbas.edge.ext.view.toHide
@@ -20,6 +21,7 @@ import kotlin.math.hypot
         More : https://developer.android.com/training/animation/reveal-or-hide-view#Reveal
  */
 
+@Keep
 enum class RevealModel {
     START,
     CENTER,

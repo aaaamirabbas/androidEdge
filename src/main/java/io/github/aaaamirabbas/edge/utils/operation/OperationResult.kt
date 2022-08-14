@@ -1,7 +1,9 @@
 package io.github.aaaamirabbas.edge.utils.operation
 
+import androidx.annotation.Keep
 import io.github.aaaamirabbas.edge.domain.model.other.FailureModel
 
+@Keep
 data class OperationResult<T>(
     private var onDoing: Long? = null,
     private var onSuccess: T? = null,

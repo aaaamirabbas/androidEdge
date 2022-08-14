@@ -1,5 +1,8 @@
 package io.github.aaaamirabbas.edge.utils.network
 
+import androidx.annotation.Keep
+
+@Keep
 enum class StatusCode(val code: Int) {
     Continue(100),
     SwitchingProtocols(101),
