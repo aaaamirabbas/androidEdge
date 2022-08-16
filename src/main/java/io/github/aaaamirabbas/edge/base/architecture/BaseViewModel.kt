@@ -17,7 +17,7 @@ abstract class BaseViewModel : ViewModel() {
         operation: suspend () -> OperationResult<T>,
         result: (OperationResult<T>) -> Unit,
     ) = launchOnViewModelIO {
-        flowOnIO<OperationResult<T>> {
+        flowOnIO {
             emit(OperationResult.doing(TimeUtils.getCurrentMillis()))
             operation.invoke().also { emit(it) }
         }.catch {
