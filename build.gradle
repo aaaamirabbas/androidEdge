@@ -68,11 +68,11 @@ android {
     }
 
 
-    lint {
-        abortOnError false
-        checkDependencies true
-        checkReleaseBuilds false
-    }
+//    lint {
+//        abortOnError false
+//        checkDependencies true
+//        checkReleaseBuilds false
+//    }
 }
 
 dependencies {
