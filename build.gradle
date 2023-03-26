@@ -73,6 +73,7 @@ android {
         checkDependencies true
         checkReleaseBuilds false
     }
+    namespace 'io.github.aaaamirabbas.edge'
 }
 
 dependencies {
