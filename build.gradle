@@ -9,6 +9,7 @@ plugins {
 }
 
 android {
+    namespace 'io.github.aaaamirabbas.edge'
     compileSdk targetV
 
     defaultConfig {
